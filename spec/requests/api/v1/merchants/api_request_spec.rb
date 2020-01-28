@@ -22,10 +22,6 @@ RSpec.describe "Merchants API" do
     expect(merchant_info["data"]["attributes"]["id"]).to eq(merchant.id)
   end
 
-  def method_name
-
-  end
-
   it "sends a list of merchants items" do
     merchant = create(:merchant)
     merchant_2 = create(:merchant)
