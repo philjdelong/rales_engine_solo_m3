@@ -13,13 +13,17 @@ RSpec.describe "Merchants API" do
   end
 
   it "sends a single merchant" do
-    id = create(:merchant).id
+    merchant = create(:merchant)
 
-    get "/api/v1/merchants/#{id}"
+    get "/api/v1/merchants/#{merchant.id}"
     expect(response).to be_successful
 
-    merchant = JSON.parse(response.body)
-    expect(merchant["data"]["id"].to_i).to eq(id)
+    merchant_info = JSON.parse(response.body)
+    expect(merchant_info["data"]["attributes"]["id"]).to eq(merchant.id)
+  end
+
+  def method_name
+
   end
 
   it "sends a list of merchants items" do
@@ -32,7 +36,7 @@ RSpec.describe "Merchants API" do
     get "/api/v1/merchants/#{merchant.id}/items"
     expect(response).to be_successful
 
-    merchant_items = JSON.parse(response.body)
+    merchant_items = JSON.parse(response.body)["data"]
     expect(merchant_items.count).to eq(2)
   end
 end
