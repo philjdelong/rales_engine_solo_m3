@@ -9,17 +9,34 @@ RSpec.describe "Merchants API" do
 
     merchants = JSON.parse(response.body)
 
-    expect(merchants.count).to eq(3)
+    expect(merchants["data"].count).to eq(3)
   end
 
   it "sends a single merchant" do
-    id = create(:merchant).id
+    merchant = create(:merchant)
 
-    get "/api/v1/merchants/#{id}"
+    get "/api/v1/merchants/#{merchant.id}"
     expect(response).to be_successful
 
-    merchant = JSON.parse(response.body)
+    merchant_info = JSON.parse(response.body)
+    expect(merchant_info["data"]["attributes"]["id"]).to eq(merchant.id)
+  end
 
-    expect(merchant["id"]).to eq(id)
+  def method_name
+
+  end
+
+  it "sends a list of merchants items" do
+    merchant = create(:merchant)
+    merchant_2 = create(:merchant)
+    item_1 = create(:item, merchant_id: merchant.id)
+    item_2 = create(:item, merchant_id: merchant.id)
+    item_2 = create(:item, merchant_id: merchant_2.id)
+
+    get "/api/v1/merchants/#{merchant.id}/items"
+    expect(response).to be_successful
+
+    merchant_items = JSON.parse(response.body)["data"]
+    expect(merchant_items.count).to eq(2)
   end
 end
