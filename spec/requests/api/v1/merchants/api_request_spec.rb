@@ -27,7 +27,7 @@ RSpec.describe "Merchants API" do
     merchant_2 = create(:merchant)
     item_1 = create(:item, merchant_id: merchant.id)
     item_2 = create(:item, merchant_id: merchant.id)
-    item_2 = create(:item, merchant_id: merchant_2.id)
+    item_3 = create(:item, merchant_id: merchant_2.id)
 
     get "/api/v1/merchants/#{merchant.id}/items"
     expect(response).to be_successful
