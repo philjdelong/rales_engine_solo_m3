@@ -1,5 +1,4 @@
 namespace :import do
-  # describe "Import merchants from CSV"
   task merchants: :environment do
     merchants = []
 
