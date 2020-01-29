@@ -4,9 +4,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index]
+        resources :favorite_customer, only: [:index]
       end
-
       resources :items, only: [:index, :show]
+      resources :customers, only: [:index, :show] do
+        resources :invoices, only: [:index]
+      end
     end
   end
 end
