@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Merchants API" do
+RSpec.describe "Customers API" do
   describe "endpoints" do
     it "sends a list of customers" do
       create_list(:customer, 10)
@@ -49,6 +49,25 @@ RSpec.describe "Merchants API" do
       invoices = JSON.parse(response.body)["data"]
 
       expect(invoices.count).to eq(3)
+    end
+
+    it "send a list of customer transactions" do
+      merchant = create(:merchant, id: 1)
+      customer_1 = create(:customer, id: 1)
+      invoice_1 = create(:invoice, id: 1, merchant_id: 1, customer_id: 1)
+      transaction_1 = create(:transaction, invoice_id: 1)
+      transaction_2 = create(:transaction, invoice_id: 1)
+      transaction_3 = create(:transaction, invoice_id: 1)
+
+      customer_2 = create(:customer, id: 2)
+      invoice_2 = create(:invoice, id: 2, merchant_id: 1, customer_id: 2)
+      transaction_4 = create(:transaction, invoice_id: 2)
+
+      get "/api/v1/customers/#{customer_1.id}/transactions"
+      expect(response).to be_successful
+
+      transactions = JSON.parse(response.body)['data']
+      expect(transactions.count).to eq(3)
     end
   end
 end
