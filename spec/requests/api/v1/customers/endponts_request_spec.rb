@@ -24,11 +24,12 @@ RSpec.describe "Merchants API" do
     end
 
     it "can find first instance by id" do
-      customer = create(:customer, id: 5)
-      get "/api/v1/customers/find?id=#{customer['id']}"
-
+      customer = create(:customer, id:10)
+      customers = create_list(:customer, 10)
+      
+      get "/api/v1/customers/find?id=#{customer.id}"
       customer_info = JSON.parse(response.body)
-      expect(customer_info["data"]["attributes"]["id"]).to eq(customer.id)
+      expect(customer_info["data"]["attributes"]["id"]).to eq(10)
     end
   end
 
