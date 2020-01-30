@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Merchants API" do
   it "sends the top customer" do
+
     merchant_1 = create(:merchant, id: 1)
     merchant_2 = create(:merchant, id: 2)
     customer_1 = create(:customer, id: 1)
@@ -37,6 +38,5 @@ RSpec.describe "Merchants API" do
 
     favorite_customer = JSON.parse(response.body)["data"]
     expect(favorite_customer["attributes"]["id"]).to eq(3)
-
   end
 end

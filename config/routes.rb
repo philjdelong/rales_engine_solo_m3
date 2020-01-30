@@ -6,10 +6,12 @@ Rails.application.routes.draw do
         resources :items, only: [:index]
         resources :favorite_customer, only: [:index]
       end
+      resources :invoices, only: [:index, :show]
       resources :items, only: [:index, :show]
       resources :customers, only: [:index, :show] do
         resources :invoices, only: [:index]
       end
+      resources :invoice_items, only: [:index, :show]
     end
   end
 end
