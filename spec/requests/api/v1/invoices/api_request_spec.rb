@@ -58,6 +58,21 @@ RSpec.describe "Invoices API" do
       expect(items_info.count).to eq(10)
     end
 
+    it "sends a list of all invoice_items" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      item = create(:item, merchant_id: merchant.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+      create_list(:item, 10, merchant_id: merchant.id)
+      create_list(:invoice_item, 10, invoice_id: invoice.id, item_id: item.id)
+
+      get "/api/v1/invoices/#{invoice.id}/invoice_items"
+      expect(response).to be_successful
+
+      invoice_items_info = JSON.parse(response.body)['data']
+      expect(invoice_items_info.count).to eq(10)
+    end
+
     it "sends the merchant and sends the customer" do
       merchant = create(:merchant, id: 1)
       customer = create(:customer, id: 1)
