@@ -4,6 +4,9 @@ class Api::V1::InvoicesController < ApplicationController
     if params[:customer_id]
       customer = Customer.find(params[:customer_id])
       invoices = customer.invoices
+    elsif params[:merchant_id]
+      merchant = Merchant.find(params[:merchant_id])
+      invoices = merchant.invoices
     else
       invoices = Invoice.all
     end
