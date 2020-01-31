@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
       resources :merchants, only: [:index, :show] do
         resources :items, only: [:index]
+        resources :invoices, only: [:index]
         resources :favorite_customer, only: [:index]
       end
 
