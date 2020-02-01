@@ -24,10 +24,10 @@ RSpec.describe "Customers API" do
     end
 
     it "sends first instance by id" do
-      customer = create(:customer, id: 10)
+      customer = create(:customer)
       customers = create_list(:customer, 10)
 
-      get "/api/v1/customers/find?id=#{customer['id']}"
+      get "/api/v1/customers/find?id=#{customer.id}"
       expect(response).to be_successful
 
       customer_info = JSON.parse(response.body)["data"]
@@ -52,6 +52,80 @@ RSpec.describe "Customers API" do
 
       customer_info = JSON.parse(response.body)["data"]
       expect(customer_info["attributes"]["id"]).to eq(customer.id)
+    end
+
+    xit "sends first instance by created_at" do
+      customer = create(:customer)
+
+      get "/api/v1/customers/find?created_at=#{customer.created_at}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+
+      expect(customer_info["attributes"]["id"]).to eq(customer.id)
+    end
+
+    xit "sends first instance by updated_at" do
+      customer = create(:customer)
+
+      get "/api/v1/customers/find?updated_at=#{customer.updated_at}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info["attributes"]["id"]).to eq(customer.id)
+    end
+
+    it "sends all instances by id" do
+      customer_1 = create(:customer, id: 1)
+      create_list(:customer, 12)
+
+      get "/api/v1/customers/find_all?id=#{customer_1["id"]}"
+      expect(response).to be_successful
+
+      customers = JSON.parse(response.body)["data"]
+      expect(customers.count).to eq(1)
+    end
+
+    it "sends all instances by first_name" do
+      customer_1 = create(:customer, id: 1)
+      create_list(:customer, 12)
+
+      get "/api/v1/customers/find_all?first_name=#{customer_1["first_name"]}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info.count).to eq(13)
+    end
+
+    it "sends all instances by last_name" do
+      customer_1 = create(:customer, id: 1)
+      create_list(:customer, 12)
+
+      get "/api/v1/customers/find_all?last_name=#{customer_1['last_name']}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info.count).to eq(13)
+    end
+
+    xit "sends all instances by created_at" do
+      create_list(:customer, 12)
+
+      get "/api/v1/customers/find_all?created_at=#{customer["created_at"]}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info.count).to eq(12)
+    end
+
+    xit "sends all instances by updated_at" do
+      create_list(:customer, 12)
+
+      get "/api/v1/customers/find_all?updated_at=#{customer["updated_at"]}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info.count).to eq(12)
     end
   end
 
