@@ -24,6 +24,174 @@ RSpec.describe "Items API" do
       item_info = JSON.parse(response.body)
       expect(item_info["data"]["attributes"]["id"]).to eq(item.id)
     end
+
+    it "sends first instance by id" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?id=#{item.id}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    it "sends all instances by id" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?id=#{item.id}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(1)
+    end
+
+    it "sends first instance by name" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?name=#{item.name}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    it "sends all instances by name" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?name=#{item.name}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
+
+    it "sends first instance by description" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?description=#{item.description}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    it "sends all instances by description" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?description=#{item.description}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
+
+    it "sends first instance by merchant_id" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?merchant_id=#{item.merchant_id}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    it "sends all instances by merchant_id" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?merchant_id=#{item.merchant_id}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
+
+    xit "sends first instance by unit_price" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?unit_price=#{item.unit_price}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    xit "sends all instances by unit_price" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?unit_price=#{item.unit_price}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
+
+    xit "sends first instance by created_at" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?created_at=#{item.created_at}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    xit "sends all instances by created_at" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?created_at=#{item.created_at}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
+
+    xit "sends first instance by updated_at" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find?updated_at=#{item.updated_at}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info["attributes"]["id"]).to eq(item.id)
+    end
+
+    xit "sends all instances by updated_at" do
+      merchant = create(:merchant)
+      item = create(:item, merchant_id: merchant.id)
+      items = create_list(:item, 10, merchant_id: merchant.id)
+
+      get "/api/v1/items/find_all?updated_at=#{item.updated_at}"
+      expect(response).to be_successful
+
+      item_info = JSON.parse(response.body)["data"]
+      expect(item_info.count).to eq(11)
+    end
   end
 
   describe "relationships" do
