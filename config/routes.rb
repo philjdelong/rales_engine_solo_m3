@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         resources :merchant, only: [:index]
         resources :customer, only: [:index]
       end
-      
+
       resources :customers, only: [:index, :show] do
         resources :invoices, only: [:index]
         resources :transactions, only: [:index]

@@ -1,8 +1,7 @@
 class Api::V1::Customers::FindController < ApplicationController
 
   def show
-    param = request.query_parameters.values[0]
-    customer = Customer.find(param)
+    customer = Customer.find_by(request.query_parameters)
     render json: CustomerSerializer.new(customer)
   end
 end
