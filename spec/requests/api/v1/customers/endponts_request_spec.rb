@@ -23,13 +23,35 @@ RSpec.describe "Customers API" do
       expect(customer_info["data"]["attributes"]["id"]).to eq(customer.id)
     end
 
-    it "can find first instance by id" do
-      customer = create(:customer, id:10)
+    it "sends first instance by id" do
+      customer = create(:customer, id: 10)
       customers = create_list(:customer, 10)
 
       get "/api/v1/customers/find?id=#{customer['id']}"
-      customer_info = JSON.parse(response.body)
-      expect(customer_info["data"]["attributes"]["id"]).to eq(10)
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info["attributes"]["id"]).to eq(customer.id)
+    end
+
+    it "sends first instance by first_name" do
+      customer = create(:customer)
+
+      get "/api/v1/customers/find?first_name=#{customer.first_name}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info["attributes"]["id"]).to eq(customer.id)
+    end
+
+    it "sends first instance by last_name" do
+      customer = create(:customer)
+
+      get "/api/v1/customers/find?last_name=#{customer.last_name}"
+      expect(response).to be_successful
+
+      customer_info = JSON.parse(response.body)["data"]
+      expect(customer_info["attributes"]["id"]).to eq(customer.id)
     end
   end
 
