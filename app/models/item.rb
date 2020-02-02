@@ -7,8 +7,4 @@ class Item < ApplicationRecord
   def unit_price
     (self["unit_price"]/100).round(2)
   end
-
-  def self.find_by_merchant(param_hash)
-    order(:id).find_by(param_hash)
-  end
 end
