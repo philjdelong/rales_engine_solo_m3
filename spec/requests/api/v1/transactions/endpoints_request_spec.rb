@@ -85,6 +85,62 @@ RSpec.describe "Transactions API" do
       transaction_info = JSON.parse(response.body)["data"]
       expect(transaction_info.count).to eq(11)
     end
+
+    it "sends first instance by created_at" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      transaction = create(:transaction, invoice_id: invoice.id, created_at: "2020-02-02 00:35:22 UTC")
+      transactions = create_list(:transaction, 10, invoice_id: invoice.id, created_at: "2020-02-02 00:35:22 UTC")
+
+      get "/api/v1/transactions/find?created_at=#{transaction.created_at}"
+      expect(response).to be_successful
+
+      transaction_info = JSON.parse(response.body)["data"]
+      expect(transaction_info["attributes"]["id"]).to eq(transaction.id)
+    end
+
+    it "sends all instances by created_at" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      transaction = create(:transaction, invoice_id: invoice.id, created_at: "2020-02-02 00:35:22 UTC")
+      transactions = create_list(:transaction, 10, invoice_id: invoice.id, created_at: "2020-02-02 00:35:22 UTC")
+
+      get "/api/v1/transactions/find_all?created_at=#{transaction.created_at}"
+      expect(response).to be_successful
+
+      transaction_info = JSON.parse(response.body)["data"]
+      expect(transaction_info.count).to eq(11)
+    end
+
+    it "sends first instance by updated_at" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      transaction = create(:transaction, invoice_id: invoice.id, updated_at: "2020-02-02 00:35:22 UTC")
+      transactions = create_list(:transaction, 10, invoice_id: invoice.id, updated_at: "2020-02-02 00:35:22 UTC")
+
+      get "/api/v1/transactions/find?updated_at=#{transaction.updated_at}"
+      expect(response).to be_successful
+
+      transaction_info = JSON.parse(response.body)["data"]
+      expect(transaction_info["attributes"]["id"]).to eq(transaction.id)
+    end
+
+    it "sends all instances by updated_at" do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      transaction = create(:transaction, invoice_id: invoice.id, updated_at: "2020-02-02 00:35:22 UTC")
+      transactions = create_list(:transaction, 10, invoice_id: invoice.id, updated_at: "2020-02-02 00:35:22 UTC")
+
+      get "/api/v1/transactions/find_all?updated_at=#{transaction.updated_at}"
+      expect(response).to be_successful
+
+      transaction_info = JSON.parse(response.body)["data"]
+      expect(transaction_info.count).to eq(11)
+    end
   end
 
   describe "relationships" do

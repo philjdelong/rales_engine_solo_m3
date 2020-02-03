@@ -35,7 +35,6 @@ RSpec.describe "Customers API" do
     end
 
     it "sends all instances by id" do
-
       customer_1 = create(:customer, id: 1)
       create_list(:customer, 12)
 
