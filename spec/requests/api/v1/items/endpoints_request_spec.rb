@@ -121,10 +121,10 @@ RSpec.describe "Items API" do
       expect(item_info.count).to eq(11)
     end
 
-    xit "sends first instance by unit_price" do
+    it "sends first instance by unit_price" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
+      items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
 
       get "/api/v1/items/find?unit_price=#{item.unit_price}"
       expect(response).to be_successful
@@ -133,10 +133,10 @@ RSpec.describe "Items API" do
       expect(item_info["attributes"]["id"]).to eq(item.id)
     end
 
-    xit "sends all instances by unit_price" do
+    it "sends all instances by unit_price" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
+      items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
 
       get "/api/v1/items/find_all?unit_price=#{item.unit_price}"
       expect(response).to be_successful

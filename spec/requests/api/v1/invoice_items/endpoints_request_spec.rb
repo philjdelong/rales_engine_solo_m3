@@ -90,7 +90,7 @@ RSpec.describe "Invoice Items API" do
       expect(invoice_item_info["attributes"]["id"]).to eq(invoice_item.id)
     end
 
-    xit "sends first instance by unit_price" do
+    it "sends first instance by unit_price" do
       merchant = create(:merchant)
       customer = create(:customer)
       invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
@@ -195,7 +195,7 @@ RSpec.describe "Invoice Items API" do
       expect(invoice_item_info.count).to eq(11)
     end
 
-    xit "sends all instances by unit_price" do
+    it "sends all instances by unit_price" do
       merchant = create(:merchant)
       customer = create(:customer)
       invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
