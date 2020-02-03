@@ -3,5 +3,6 @@ FactoryBot.define do
     name { "B-52" }
     description { "There's a snake in my boots." }
     unit_price { 1 }
+    merchant_id { 1 }
   end
 end
