@@ -121,7 +121,7 @@ RSpec.describe "Items API" do
       expect(item_info.count).to eq(11)
     end
 
-    it "sends first instance by unit_price" do
+    xit "sends first instance by unit_price" do
       merchant = create(:merchant)
       item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
       items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
@@ -133,7 +133,7 @@ RSpec.describe "Items API" do
       expect(item_info["attributes"]["id"]).to eq(item.id)
     end
 
-    it "sends all instances by unit_price" do
+    xit "sends all instances by unit_price" do
       merchant = create(:merchant)
       item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
       items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
