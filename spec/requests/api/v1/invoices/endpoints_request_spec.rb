@@ -135,11 +135,11 @@ RSpec.describe "Invoices API" do
       expect(invoice_item_info.count).to eq(11)
     end
 
-    xit "sends first instance by created_at" do
+    it "sends first instance by created_at" do
       merchant = create(:merchant)
       customer = create(:customer)
-      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id, created_at: "2020-02-02 00:35:22 UTC")
+      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/invoices/find?created_at=#{invoice.created_at}"
       expect(response).to be_successful
@@ -148,12 +148,12 @@ RSpec.describe "Invoices API" do
       expect(invoice_item_info["attributes"]["id"]).to eq(invoice.id)
     end
 
-    xit "sends all instances by created_at" do
+    it "sends all instances by created_at" do
       merchant = create(:merchant)
       customer = create(:customer)
-      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
       item = create(:item, merchant_id: merchant.id)
-      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id, created_at: "2020-02-02 00:35:22 UTC")
+      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/invoices/find_all?created_at=#{invoice.created_at}"
       expect(response).to be_successful
@@ -162,11 +162,11 @@ RSpec.describe "Invoices API" do
       expect(invoice_item_info.count).to eq(11)
     end
 
-    xit "sends first instance by updated_at" do
+    it "sends first instance by updated_at" do
       merchant = create(:merchant)
       customer = create(:customer)
-      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id, updated_at: "2020-02-02 00:35:22 UTC")
+      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/invoices/find?updated_at=#{invoice.updated_at}"
       expect(response).to be_successful
@@ -175,12 +175,12 @@ RSpec.describe "Invoices API" do
       expect(invoice_item_info["attributes"]["id"]).to eq(invoice.id)
     end
 
-    xit "sends all instances by updated_at" do
+    it "sends all instances by updated_at" do
       merchant = create(:merchant)
       customer = create(:customer)
-      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
       item = create(:item, merchant_id: merchant.id)
-      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id)
+      invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id, updated_at: "2020-02-02 00:35:22 UTC")
+      invoices = create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/invoices/find_all?updated_at=#{invoice.updated_at}"
       expect(response).to be_successful

@@ -67,9 +67,9 @@ RSpec.describe "Merchants API" do
       expect(merchant_info.count).to eq(11)
     end
 
-    xit "sends first instance by created_at" do
-      merchant = create(:merchant)
-      merchants = create_list(:merchant, 10)
+    it "sends first instance by created_at" do
+      merchant = create(:merchant, created_at: "2020-02-02 00:35:22 UTC")
+      merchants = create_list(:merchant, 10, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/merchants/find?created_at=#{merchant.created_at}"
       expect(response).to be_successful
@@ -78,9 +78,9 @@ RSpec.describe "Merchants API" do
       expect(merchant_info["attributes"]["id"]).to eq(merchant.id)
     end
 
-    xit "sends all instances by created_at" do
-      merchant = create(:merchant)
-      merchants = create_list(:merchant, 10)
+    it "sends all instances by created_at" do
+      merchant = create(:merchant, created_at: "2020-02-02 00:35:22 UTC")
+      merchants = create_list(:merchant, 10, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/merchants/find_all?created_at=#{merchant.created_at}"
       expect(response).to be_successful
@@ -89,9 +89,9 @@ RSpec.describe "Merchants API" do
       expect(merchant_info.count).to eq(11)
     end
 
-    xit "sends first instance by updated_at" do
-      merchant = create(:merchant)
-      merchants = create_list(:merchant, 10)
+    it "sends first instance by updated_at" do
+      merchant = create(:merchant, updated_at: "2020-02-02 00:35:22 UTC")
+      merchants = create_list(:merchant, 10, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/merchants/find?updated_at=#{merchant.updated_at}"
       expect(response).to be_successful
@@ -100,9 +100,9 @@ RSpec.describe "Merchants API" do
       expect(merchant_info["attributes"]["id"]).to eq(merchant.id)
     end
 
-    xit "sends all instances by updated_at" do
-      merchant = create(:merchant)
-      merchants = create_list(:merchant, 10)
+    it "sends all instances by updated_at" do
+      merchant = create(:merchant, updated_at: "2020-02-02 00:35:22 UTC")
+      merchants = create_list(:merchant, 10, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/merchants/find_all?updated_at=#{merchant.updated_at}"
       expect(response).to be_successful

@@ -123,8 +123,8 @@ RSpec.describe "Items API" do
 
     xit "sends first instance by unit_price" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
+      items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
 
       get "/api/v1/items/find?unit_price=#{item.unit_price}"
       expect(response).to be_successful
@@ -135,8 +135,8 @@ RSpec.describe "Items API" do
 
     xit "sends all instances by unit_price" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, unit_price: 2.25)
+      items = create_list(:item, 10, merchant_id: merchant.id, unit_price: 2.25)
 
       get "/api/v1/items/find_all?unit_price=#{item.unit_price}"
       expect(response).to be_successful
@@ -145,10 +145,10 @@ RSpec.describe "Items API" do
       expect(item_info.count).to eq(11)
     end
 
-    xit "sends first instance by created_at" do
+    it "sends first instance by created_at" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, created_at: "2020-02-02 00:35:22 UTC")
+      items = create_list(:item, 10, merchant_id: merchant.id, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/items/find?created_at=#{item.created_at}"
       expect(response).to be_successful
@@ -157,10 +157,10 @@ RSpec.describe "Items API" do
       expect(item_info["attributes"]["id"]).to eq(item.id)
     end
 
-    xit "sends all instances by created_at" do
+    it "sends all instances by created_at" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, created_at: "2020-02-02 00:35:22 UTC")
+      items = create_list(:item, 10, merchant_id: merchant.id, created_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/items/find_all?created_at=#{item.created_at}"
       expect(response).to be_successful
@@ -169,10 +169,10 @@ RSpec.describe "Items API" do
       expect(item_info.count).to eq(11)
     end
 
-    xit "sends first instance by updated_at" do
+    it "sends first instance by updated_at" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, updated_at: "2020-02-02 00:35:22 UTC")
+      items = create_list(:item, 10, merchant_id: merchant.id, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/items/find?updated_at=#{item.updated_at}"
       expect(response).to be_successful
@@ -181,10 +181,10 @@ RSpec.describe "Items API" do
       expect(item_info["attributes"]["id"]).to eq(item.id)
     end
 
-    xit "sends all instances by updated_at" do
+    it "sends all instances by updated_at" do
       merchant = create(:merchant)
-      item = create(:item, merchant_id: merchant.id)
-      items = create_list(:item, 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id, updated_at: "2020-02-02 00:35:22 UTC")
+      items = create_list(:item, 10, merchant_id: merchant.id, updated_at: "2020-02-02 00:35:22 UTC")
 
       get "/api/v1/items/find_all?updated_at=#{item.updated_at}"
       expect(response).to be_successful
