@@ -1,5 +1,28 @@
 # README
 
+**Deployed on Heroku**
+_https://rales-engine-pd.herokuapp.com/api/v1_
+
+**Endpoints**
+_/merchants_
+_/customers_
+_/items_
+_/invoices_
+_/invoice_items_
+_/transactions_
+
+**Relationship Endpoints**
+- Standard CRUD functionality used for all classes and paths
+- Relationships set up to follow standard convention { :index, :show }
+- Examples:
+_/merchant/customers_
+_/customer/invoices_
+_/item/merchant_id_
+
+**Business Logic Endpoints**
+_/merchant/favorite_customer
+_/customer/favorite_merchant
+
 **Ruby version**
  _RUBY VERSION
     ruby 2.6.3p62
@@ -33,8 +56,11 @@
 **Database creation and initialization**
  - _rails db:{ :create, :migrate, :seed }_
 
+**Importing CSV data**
+ - _rake import:{ :customers, :invoice_items, :invoices, :items, :merchants, :transactions }_
+
 **How to run the test suite**
  - _bundle exec rspec_
 
 **Additional Info**
- - _API utilizes standard JSON formatting with Serializers. 
+ - _API follows standard JSON formatting using Serializers_
