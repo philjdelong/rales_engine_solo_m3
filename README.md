@@ -52,7 +52,7 @@ _/customer/favorite_merchant
  turbolinks (~> 5)
  tzinfo-data
  uglifier (>= 1.3.0)
- web-console (>= 3.3.0)_
+ web-console (>= 3.3.0)
 
 **Database creation and initialization**
  - _rails db:{ :create, :migrate, :seed }_
